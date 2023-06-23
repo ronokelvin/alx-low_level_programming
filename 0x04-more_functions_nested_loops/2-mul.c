@@ -1,12 +1,4 @@
-/**
- * mul - multiplication of  two integers
- *
- * @a: first integer
- * @b: second integer
- *
- * Return: product of a & b
- */
-
+#include <stdio.h>
 int mul(int a, int b)
 {
 	return (a * b);
