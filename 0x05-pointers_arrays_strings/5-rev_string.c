@@ -1,4 +1,8 @@
-v_string -  a string is reversed
+#include <stdio.h>
+#include "main.h"
+
+/**
+ * rev_string -  a string is reversed
  * @s: string to be reversed
  *
  * Return: nothing
