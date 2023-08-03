@@ -1,37 +1,33 @@
-#include <stdio.h>
-#include <string.h>
+#include "main.h"
 
 unsigned int binary_to_uint(const char *b) {
-    if (b == NULL) {
+    if (b == NULL)
         return 0;
-    }
 
     unsigned int result = 0;
-    int len = strlen(b);
+    int shift = 0;
+    const char *current_char = b;
 
-    for (int i = 0; i < len; i++) {
-        if (b[i] != '0' && b[i] != '1') {
-            // If there is a character that is not '0' or '1', return 0.
+    // Find the end of the string
+    while (*current_char != '\0')
+        current_char++;
+
+    // Move back to the last character
+    current_char--;
+
+    // Iterate through the string from the end to the beginning
+    while (current_char >= b) {
+        if (*current_char == '0' || *current_char == '1') {
+            // If the character is '0' or '1', update the result accordingly
+            result += (*current_char - '0') << shift;
+            shift++;
+        } else {
+            // If the character is neither '0' nor '1', return 0 (invalid input)
             return 0;
         }
-
-        // Convert the binary digit to an integer and add it to the result.
-        result = (result << 1) + (b[i] - '0');
+        current_char--;
     }
 
     return result;
-}
-
-int main() {
-    const char *binaryStr1 = "0001";
-    const char *binaryStr2 = "0101";
-    const char *binaryStr2 = "0000";
-    const char *binaryStr2 = "01100010";
-    const char *binaryStr2 = "110010010";
-
-    printf("Result 1: %u\n", binary_to_uint(binaryStr1));
-    printf("Result 2: %u\n", binary_to_uint(binaryStr2));
-
-    return 0;
 }
 
