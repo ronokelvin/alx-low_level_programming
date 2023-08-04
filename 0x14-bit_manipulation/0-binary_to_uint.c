@@ -1,33 +1,37 @@
 #include "main.h"
 
-unsigned int binary_to_uint(const char *b) {
-    if (b == NULL)
-        return 0;
+/**
+ * binary_to_uint - converts a binary number to an
+ * unsigned int.
+ * @b: binary.
+ *
+ * Return: unsigned int.
+ */
+unsigned int binary_to_uint(const char *b)
+{
+	unsigned int ui;
+	int len, base_two;
 
-    unsigned int result = 0;
-    int shift = 0;
-    const char *current_char = b;
+	if (!b)
+		return (0);
 
-    // Find the end of the string
-    while (*current_char != '\0')
-        current_char++;
+	ui = 0;
 
-    // Move back to the last character
-    current_char--;
+	for (len = 0; b[len] != '\0'; len++)
+		;
 
-    // Iterate through the string from the end to the beginning
-    while (current_char >= b) {
-        if (*current_char == '0' || *current_char == '1') {
-            // If the character is '0' or '1', update the result accordingly
-            result += (*current_char - '0') << shift;
-            shift++;
-        } else {
-            // If the character is neither '0' nor '1', return 0 (invalid input)
-            return 0;
-        }
-        current_char--;
-    }
+	for (len--, base_two = 1; len >= 0; len--, base_two *= 2)
+	{
+		if (b[len] != '0' && b[len] != '1')
+		{
+			return (0);
+		}
 
-    return result;
+		if (b[len] & 1)
+		{
+			ui += base_two;
+		}
+	}
+
+	return (ui);
 }
-
